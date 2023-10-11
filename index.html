@@ -31,7 +31,6 @@
        
 
         .card{
-            border-radius: 20px;
             font-size: 13px;
             
         }
@@ -45,6 +44,9 @@
             transform: scale(0.9);
             
         }
+        a {
+  text-decoration: none;
+}
     </style>
 </head>
 
@@ -61,19 +63,27 @@
               <button type="button" class="btn-close btn btn-light rounded-4" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <button class="w-100 btn shadow-sm btn-light btn-lg rounded-5 my-2"> <i class="bi bi-search text-primary"></i> Search</button>
+                <!-- <button class="w-100 btn shadow-sm btn-light btn-lg rounded-5 my-2"> <i class="bi bi-search text-primary"></i> Search</button> -->
                 <div class="row">
-                    <div class="col-6">
-                        <div class="card click shadow-sm card-body rounded-5 my-2 text-bg-light border-0 fw-bold text-center"><i class="bi bi-youtube fs-1 text-danger"></i>Youtube</div>
+                    <div class="col-12">
+                        <div class="card click card-body rounded-5 my-2 border-0 fw-bold fs-4 text-light" style="background-color: rgb(113, 43, 226);">
+                            We are on <br> <span>YOUTUBE <i class="bi bi-youtube fs-1 mx-3 text-danger  "></i> </span>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card click shadow-sm card-body rounded-5 my-2 text-bg-light border-0 fw-bold text-center"> <i class="bi bi-check2-circle fs-1 text-primary"></i> To-do</div>
+                    <div class="col-12">
+                        <div onclick="showCard('ncert')" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" class="card click card-body rounded-5 my-2 border-0 fw-bold fs-4 text-light" style="background-color: rgb(255, 145, 1);">
+                            Check for <br> <span>NCERT <i class="bi bi-journal-bookmark-fill fs-1 text-primary mx-3"></i> </span>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card click shadow-sm card-body rounded-5 my-2 text-bg-light border-0 fw-bold text-center"> <i class="bi bi-journal-medical fs-1 text-warning"></i> NCERT</div>
+                    <div class="col-12">
+                        <div onclick="showCard('note')" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" class="card click card-body rounded-5 my-2 border-0 fw-bold fs-4 text-dark" style="background-color: rgb(0, 255, 179);">
+                            Check for <br> <span>NOTES <i class="bi bi-body-text fs-1 text-success mx-3"></i></span>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card click shadow-sm card-body rounded-5 my-2 text-bg-light border-0 fw-bold text-center"><i class="bi bi-body-text fs-1 text-success"></i> Notes</div>
+                    <div class="col-12">
+                        <a href="log.html" class="card click card-body rounded-5 my-2 border-0 fw-bold fs-4 text-light" style="background-color: rgb(0, 153, 255);">
+                            Change the <br> <span> CLASS <i class="bi bi-123 fs-1 text-warning mx-3"></i></span>
+                        </a>
                     </div>
                     
                 </div>
@@ -90,7 +100,7 @@
                     <button class="btn btn-outline-danger rounded-4"><i class="bi bi-box-arrow-left"></i></button>
                 </div>
                 <div class="col-9">
-                    <button class="btn btn-dark w-100 rounded-4">GSA</button>
+                    <button onclick="showAllCards()" class="btn btn-dark w-100 rounded-4" id="superbtn">GSA</button>
                 </div>
             </div>
         </div>
@@ -99,9 +109,9 @@
 
 
     <div class="container" id="show_data"  style="margin-top: 100px; margin-bottom: 100px;">
-        
+    
 
-        <div class="card my-2" aria-hidden="true" id="loader">
+        <div class="card my-2 rounded-5" aria-hidden="true" id="loader">
         
             <div class="card-body">
                 <div class="card-img-top"></div>
@@ -133,7 +143,8 @@
         doc,
         getDoc,
         getDocs,
-        collection
+        collection,
+        where
     } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
@@ -158,27 +169,16 @@
 
     // Check if the "userClass" key exists in localStorage
 if (localStorage.getItem("userClass") === null) {
-  // If it doesn't exist, prompt the user for a value
-  var userClass = prompt("Enter your user class:");
-  
-  // Check if the user entered a value
-  if (userClass !== null && userClass !== "") {
-    // Save the value to localStorage
-    localStorage.setItem("userClass", userClass);
-  } else {
-    // Handle the case where the user didn't enter a value or canceled the prompt
-    alert("You must enter a user class.");
-  }
+    window.location.href = 'log.html';
 } else {
   // If the key exists in localStorage, assign its value to a variable
   var userClass = localStorage.getItem("userClass");
-  alert("Your user class is: " + userClass);
 }
 
 
     const  show_data = document.getElementById("show_data");
     const loader  = document.getElementById("loader");
-    const q = query(collection(db, "data"));
+    const q = query(collection(db, "data") , where("class", "==", userClass));
     const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
@@ -187,30 +187,46 @@ querySnapshot.forEach((doc) => {
 
 
         switch (doc.data().type) {
-            case "alert":
-            show_data.innerHTML += `
-                <div class="alert alert-light  shadow-sm rounded-4 animate__animated animate__fadeInDown" role="alert">
-                    ${doc.data().title}
-                </div>
-        
-                `;
-                break;
             case "card":
             show_data.innerHTML += `
-                <div class="card my-2 animate__animated animate__fadeInDown">
-                    <div class="card-body">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 text-bg-light shadow-sm animate__animated animate__fadeInDown">
+                    <div class="card-body fs-6">
                     ${doc.data().title}
                     <br>
-                  <a href="page.html?q=${doc.id}" class="btn click btn-success mt-2 rounded-4"> More <i class="bi bi-arrow-right-circle"></i></a>
+                  <a href="page.html?q=${doc.id}" class="btn click btn-outline-primary mt-2 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
                 </div>
                 </div>
             `;
                 break;
+            case "ncert":
+            show_data.innerHTML += `
+                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 text-bg-light shadow-sm animate__animated animate__fadeInDown">
+                    <div class="card-body fs-6">
+                    ${doc.data().title}
+                    <br>
+                  <a href="page.html?q=${doc.id}" class="btn click btn-outline-primary mt-2 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
+                </div>
+                </div>
+            `;
+                break;
+            case "note":
+                show_data.innerHTML += `
+                <a href="${doc.data().href}" id="${doc.data().type}" class="card  card-body rounded-5 border-0 text-bg-light shadow-sm click my-2 animate__animated animate__fadeInDown" >
+        <div class="row">
+            <div class="col-9 text-truncate ">
+                This text is quite long, and will be truncated once displayed.
+            </div>
+            <div class="col-3 fs-6">
+                <i class="bi bi-cloud-arrow-down-fill text-primary"></i>
+            </div>
+        </div>
+    </a>`;
+            break;
         
             default: 
             show_data.innerHTML += `
-                <div class="card my-2 animate__animated animate__fadeInDown">
-                    <div class="card-body">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 text-bg-light shadow-sm animate__animated animate__fadeInDown">
+                    <div class="card-body fs-6">
                     ${doc.data().title}
                     <br>
                 </div>
@@ -219,6 +235,43 @@ querySnapshot.forEach((doc) => {
                 break;
         }
 });
+</script>
+<script>
+    const superbtn = document.getElementById('superbtn');
+    const container = document.getElementById('show_data');
+    // const loaderx = document.getElementById('loader');
+    const cards = container.getElementsByClassName('card');
+     function showCard(idToShow) {
+            // Get the container element
+            var container = document.getElementById('show_data');
+
+            // Get all elements with the class "card" within the container
+            var cards = container.getElementsByClassName('card');
+
+            // Loop through each card and hide it if it doesn't match the specified id
+            for (var i = 0; i < cards.length; i++) {
+                if (cards[i].id === idToShow) {
+                    cards[i].style.display = 'block';
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
+            loader.style.display = "none";
+            superbtn.innerHTML = `Show all <i class="bi bi-balloon"></i>`;
+            superbtn.classList.replace("btn-dark","btn-success");
+
+        };
+        function showAllCards() {
+           
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = 'block';
+            }
+            superbtn.innerHTML = "GSA";
+            superbtn.classList.replace("btn-success","btn-dark");
+            loader.style.display = "none";
+
+        };
+
 </script>
 
 </html>
