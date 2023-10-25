@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>GSA</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="bootstrap.min.css" rel="stylesheet" >
-    <script src="bootstrap.bundle.min.js"></script>
-<link
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <link
     rel="stylesheet"
-    href="animate.min.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 
 
     <style>
         /* Import Google font - Poppins */
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Lexend");
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
+            font-family: "Lexend", sans-serif;
             transition-duration: 0.3s;
         }
     
@@ -49,11 +52,11 @@
 </head>
 
 <body>
-    <nav class="navbar  fixed-top shadow rounded-bottom-5">
+    <nav class="navbar bg-black fixed-top shadow rounded-bottom-5">
         <div class="container-fluid">
-          <a class=" btn btn-danger rounded-5"href="#exitapp"><i class="bi bi-escape"></i> GSA</a>
+          <a class=" btn btn-dark rounded-5"href="#exitapp">😎 GSA</a>
           <div class="btn-group">
-            <button type="button" class="btn btn-light btn-sm rounded-5 dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <button type="button" class="btn btn-dark btn-sm rounded-5 dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
               More
             </button>
             <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start rounded-4 shadow">
@@ -63,7 +66,7 @@
         </div>
       </nav>
 
-    <nav class="navbar fixed-bottom shadow-lg rounded-top-5">
+    <nav class="navbar bg-black fixed-bottom shadow-lg rounded-top-5">
         
         <div class="container-fluid ">
             <!-- <div class="row w-100">
@@ -74,18 +77,18 @@
                     <button onclick="showAllCards()" class="btn btn-dark w-100 rounded-4" id="superbtn">GSA</button>
                 </div>
             </div> -->
-            <ul class="nav nav-pills justify-content-center m-auto">
+            <ul class="nav nav-pills d-flex justify-content-around w-100">
                 <li class="nav-item ">
-                  <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5 shadow-sm active " href="#"><i class="bi bi-house-fill"></i></a>
+                  <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5 shadow active " href="#"><i class="bi bi-house-fill"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a id="blog" onclick="togNav('blog')" class="nav-link rounded-5 shadow-sm " href="#"><i class="bi bi-pencil-square"></i></a>
+                  <a id="blog" onclick="togNav('blog')" class="nav-link rounded-5 shadow " href="#"><i class="bi bi-pencil-square"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a id="note" onclick="togNav('note')" class="nav-link rounded-5 shadow-sm " href="#"><i class="bi bi-body-text"></i></a>
+                  <a id="note" onclick="togNav('note')" class="nav-link rounded-5 shadow " href="#"><i class="bi bi-body-text"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-5 shadow-sm "><i class="bi bi-journal-bookmark-fill"></i></a>
+                  <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-5 shadow "  href="#"><i class="bi bi-journal-bookmark-fill"></i></a>
                 </li>
               </ul>
         </div>
@@ -174,7 +177,7 @@ querySnapshot.forEach((doc) => {
         switch (doc.data().type) {
             case "batch":
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 text-bg-light shadow-sm animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5  shadow animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                   <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-5"> More <i class="bi bi-arrow-right-short"></i></a>
@@ -184,7 +187,7 @@ querySnapshot.forEach((doc) => {
                 break;
             case "ncert":
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 text-bg-light shadow-sm animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5  shadow animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                   <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
@@ -194,7 +197,7 @@ querySnapshot.forEach((doc) => {
                 break;
             case "note":
                 show_data.innerHTML += `
-                <a href="${doc.data().href}#exitapp" id="${doc.data().type}" class="card  card-body rounded-5 border-0 text-bg-light shadow-sm click my-2 animate__animated animate__fadeInUp" >
+                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body rounded-5  shadow click my-2 animate__animated animate__fadeInUp" >
         <div class="row">
             <div class="col-9 text-truncate ">
                 ${doc.data().title}
@@ -208,7 +211,7 @@ querySnapshot.forEach((doc) => {
         
             default: 
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 text-bg-light shadow-sm animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5  shadow animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                   <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
@@ -253,8 +256,6 @@ querySnapshot.forEach((doc) => {
             for (var i = 0; i < cards.length; i++) {
                 cards[i].style.display = 'block';
             }
-            superbtn.innerHTML = "GSA";
-            superbtn.classList.replace("btn-success","btn-dark");
             loader.style.display = "none";
 
         };
