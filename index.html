@@ -34,6 +34,9 @@
         .card{
             font-size: 13px;
         }
+        .nav-link{
+            font-size: 10px;
+        }
         .alert{
             font-size: 13px;
         }
@@ -79,16 +82,16 @@
             </div> -->
             <ul class="nav nav-pills d-flex justify-content-around w-100">
                 <li class="nav-item ">
-                  <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5 shadow active " href="#"><i class="bi bi-house-fill"></i></a>
+                  <a id="batch" onclick="togNav('batch')" class="nav-link rounded-4 shadow active  text-center" href="#"><i class="bi bi-house-fill"></i> <br> Home </a>
                 </li>
                 <li class="nav-item">
-                  <a id="blog" onclick="togNav('blog')" class="nav-link rounded-5 shadow " href="#"><i class="bi bi-pencil-square"></i></a>
+                  <a id="blog" onclick="togNav('blog')" class="nav-link rounded-4 shadow text-center " href="#"><i class="bi bi-pencil-square"></i> <br> Connect </a>
                 </li>
                 <li class="nav-item">
-                  <a id="note" onclick="togNav('note')" class="nav-link rounded-5 shadow " href="#"><i class="bi bi-body-text"></i></a>
+                  <a id="note" onclick="togNav('note')" class="nav-link rounded-4 shadow text-center " href="#"><i class="bi bi-body-text"></i> <br> PDFs</a>
                 </li>
                 <li class="nav-item">
-                  <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-5 shadow "  href="#"><i class="bi bi-journal-bookmark-fill"></i></a>
+                  <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-4 shadow text-center "  href="#"><i class="bi bi-journal-bookmark-fill"></i> <br> Books</a>
                 </li>
               </ul>
         </div>
@@ -166,7 +169,7 @@ if (localStorage.getItem("userClass") == null) {
 
     const  show_data = document.getElementById("show_data");
     const loader  = document.getElementById("loader");
-    const q = query(collection(db, "data") , where("class", "==", userClass));
+    const q = query(collection(db, "data") , where("class", "in", [userClass,'0']));
     const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
@@ -177,9 +180,10 @@ querySnapshot.forEach((doc) => {
         switch (doc.data().type) {
             case "batch":
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5  shadow animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 border-0 border-bottom border-5 border-black rounded-5  shadow-lg animate__animated animate__fadeInUp">
                     <div class="card-body">
-                    ${doc.data().title}
+                    
+                    <div class="border-start border-5 border-success shadow p-2 my-1">${doc.data().title} </div>
                   <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-5"> More <i class="bi bi-arrow-right-short"></i></a>
                 </div>
                 </div>
@@ -187,9 +191,10 @@ querySnapshot.forEach((doc) => {
                 break;
             case "ncert":
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5  shadow animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 border-bottom border-5 border-black shadow-lg animate__animated animate__fadeInUp">
                     <div class="card-body">
-                    ${doc.data().title}
+                        <div class="border-start border-5 border-warning shadow p-2 my-1">${doc.data().title} </div>
+                    
                   <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
                 </div>
                 </div>
@@ -197,7 +202,7 @@ querySnapshot.forEach((doc) => {
                 break;
             case "note":
                 show_data.innerHTML += `
-                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body rounded-5  shadow click my-2 animate__animated animate__fadeInUp" >
+                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body  rounded-5  shadow-lg click my-2 animate__animated animate__fadeInUp" >
         <div class="row">
             <div class="col-9 text-truncate ">
                 ${doc.data().title}
@@ -211,7 +216,7 @@ querySnapshot.forEach((doc) => {
         
             default: 
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5  shadow animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 border-bottom border-5 border-black  shadow-lg animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                   <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
