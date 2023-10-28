@@ -55,7 +55,7 @@
 </head>
 
 <body>
-    <nav class="navbar bg-black fixed-top shadow rounded-bottom-5">
+    <nav class="navbar bg-black fixed-top shadow">
         <div class="container-fluid">
           <a class=" btn btn-dark rounded-5"href="#exitapp">😎 GSA</a>
           <div class="btn-group">
@@ -69,7 +69,7 @@
         </div>
       </nav>
 
-    <nav class="navbar bg-black fixed-bottom shadow-lg rounded-top-5">
+    <nav class="navbar bg-black fixed-bottom shadow-lg  ">
         
         <div class="container-fluid ">
             <!-- <div class="row w-100">
@@ -82,16 +82,16 @@
             </div> -->
             <ul class="nav nav-pills d-flex justify-content-around w-100">
                 <li class="nav-item ">
-                  <a id="batch" onclick="togNav('batch')" class="nav-link rounded-4 shadow active  text-center" href="#"><i class="bi bi-house-fill"></i> <br> Home </a>
+                  <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5 shadow active  text-center" href="#"><i class="bi bi-house-fill"></i> <br> Home </a>
                 </li>
                 <li class="nav-item">
-                  <a id="blog" onclick="togNav('blog')" class="nav-link rounded-4 shadow text-center " href="#"><i class="bi bi-pencil-square"></i> <br> Connect </a>
+                  <a id="blog" onclick="togNav('blog')" class="nav-link rounded-5 shadow text-center " href="#"><i class="bi bi-pencil-square"></i> <br> Connect </a>
                 </li>
                 <li class="nav-item">
-                  <a id="note" onclick="togNav('note')" class="nav-link rounded-4 shadow text-center " href="#"><i class="bi bi-body-text"></i> <br> PDFs</a>
+                  <a id="note" onclick="togNav('note')" class="nav-link rounded-5 shadow text-center " href="#"><i class="bi bi-body-text"></i> <br> PDFs</a>
                 </li>
                 <li class="nav-item">
-                  <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-4 shadow text-center "  href="#"><i class="bi bi-journal-bookmark-fill"></i> <br> Books</a>
+                  <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-5 shadow text-center "  href="#"><i class="bi bi-journal-bookmark-fill"></i> <br> Books</a>
                 </li>
               </ul>
         </div>
@@ -180,29 +180,29 @@ querySnapshot.forEach((doc) => {
         switch (doc.data().type) {
             case "batch":
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 border-0 border-bottom border-5 border-black rounded-5  shadow-lg animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 bg-black shadow animate__animated animate__fadeInUp">
                     <div class="card-body">
-                    
-                    <div class="border-start border-5 border-success shadow p-2 my-1">${doc.data().title} </div>
-                  <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-5"> More <i class="bi bi-arrow-right-short"></i></a>
+                    ${doc.data().title}
+                  <a href="page.html?q=${doc.id}" class="btn click  btn-success rounded-5 shadow-sm w-100 mt-1"> More <i class="bi bi-arrow-right-short"></i></a>
                 </div>
                 </div>
             `;
                 break;
             case "ncert":
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 border-bottom border-5 border-black shadow-lg animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 bg-black  shadow animate__animated animate__fadeInUp">
                     <div class="card-body">
-                        <div class="border-start border-5 border-warning shadow p-2 my-1">${doc.data().title} </div>
+                
+                ${doc.data().title} 
                     
-                  <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
+                  <a href="page.html?q=${doc.id}" class="btn click  btn-success rounded-5 shadow-sm w-100 mt-1"> More <i class="bi bi-arrow-right-short"></i></a>
                 </div>
                 </div>
             `;
                 break;
             case "note":
                 show_data.innerHTML += `
-                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body  rounded-5  shadow-lg click my-2 animate__animated animate__fadeInUp" >
+                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body  rounded-4 border-0  shadow-lg click my-2 animate__animated animate__fadeInUp" >
         <div class="row">
             <div class="col-9 text-truncate ">
                 ${doc.data().title}
@@ -216,10 +216,10 @@ querySnapshot.forEach((doc) => {
         
             default: 
             show_data.innerHTML += `
-                <div id="${doc.data().type}" class="card my-2 rounded-5 border-0 border-bottom border-5 border-black  shadow-lg animate__animated animate__fadeInUp">
+                <div id="${doc.data().type}" class="card my-2 rounded-5 bg-black shadow animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
-                  <a href="page.html?q=${doc.id}" class="btn click btn-success w-100 mt-1 rounded-4"> More <i class="bi bi-arrow-right-short"></i></a>
+                  <a href="page.html?q=${doc.id}" class="btn click btn-success  rounded-5 w-100 mt-1"> More <i class="bi bi-arrow-right-short"></i></a>
                 </div>
                 </div>
             `;
