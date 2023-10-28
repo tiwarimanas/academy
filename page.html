@@ -48,14 +48,14 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top shadow bg-black rounded-bottom-5">
+    <nav class="navbar fixed-top shadow bg-black">
         <div class="container-fluid">
           <a class=" btn btn-dark rounded-5"href="#exitapp">😎 GSA</a>
       </nav>
 
-    <nav class="navbar fixed-bottom shadow-lg bg-black rounded-top-5">
+    <nav class="navbar fixed-bottom shadow-lg bg-black ">
         <div class="container-fluid ">
-            <a href="index.html" class="btn btn-success rounded-4 w-100"><i class="bi bi-arrow-left"></i> Back</a>
+            <a href="index.html" class="btn btn-dark rounded-5  w-100"><i class="bi bi-arrow-left"></i> Back</a>
         </div>
     </nav>
 
@@ -139,8 +139,8 @@ if (docSnap.exists()) {
   loader.style.display = "none";
   show_data.innerHTML += `
   
-        <div class="card card-body my-2 rounded-5 shadow animate__animated animate__fadeInUp">
-            <div class="border-start border-5 border-success shadow p-2 my-2">${docSnap.data().title} </div>
+        <div class="card card-body border-0 my-2 shadow animate__animated animate__fadeInUp">
+            <div class="bg-black rounded-5 p-3 my-2">${docSnap.data().title} </div>
                 ${docSnap.data().data}
         
         </div>
