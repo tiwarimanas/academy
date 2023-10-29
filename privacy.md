@@ -12,7 +12,7 @@ We do not collect any personal information directly from our users. However, it 
 
 a. **Google Firebase**: We use Google Firebase for the backend infrastructure of our platform. Google Firebase may collect certain information, such as device information, usage statistics, and cookies, to help us improve our services and troubleshoot issues. Please refer to Google's Privacy Policy for more information: [Google Privacy Policy](https://policies.google.com/privacy).
 
-b. **MIT App Inventor**: Our application is powered by MIT App Inventor. MIT App Inventor may collect certain information for analytics and application performance. Please refer to MIT App Inventor's Privacy Policy for more details: [MIT App Inventor Privacy Policy](https://appinventor.mit.edu/about/privacy.html).
+b. **MIT App Inventor**: Our application is powered by MIT App Inventor. MIT App Inventor may collect certain information for analytics and application performance. Please refer to MIT App Inventor's Privacy Policy for more details: [MIT App Inventor Privacy Policy](https://appinventor.mit.edu/about/termsofservice).
 
 **3. Cookies and Tracking Technologies**
 
