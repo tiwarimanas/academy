@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -26,25 +26,27 @@
             transition-duration: 0.3s;
         }
 
-
+        h1,h2,h3,h4,h5,h6 {
+            padding-left: 5px;
+            border-left: 5px solid rgb(132, 0, 255);
+            font-weight: bold;
+        }
+        
 
         .card {
             font-size: 13px;
-            border-radius: 30px;
-        }
-
-        .btn {
-            border-radius: 30px;
+            background-color: whitesmoke;
+            border: 1px solid white
         }
 
         .card:hover {
-            background-color: black;
-            border-radius: 50px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 15px 0 rgba(107, 107, 107, 0.75);
         }
 
         .nav-link {
             font-size: 10px;
-            background-color: rgb(27, 27, 27);
+            background-color: whitesmoke;
         }
 
         .alert {
@@ -63,19 +65,58 @@
         a {
             text-decoration: none;
         }
+
+        .bn632-hover {
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            height: 40px;
+            text-align: center;
+            border: none;
+            background-size: 300% 100%;
+            border-radius: 10px;
+            -o-transition: all 0.4s ease-in-out;
+            -webkit-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .bn632-hover:hover {
+            background-position: 100% 0;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .bn632-hover:focus {
+            outline: none;
+        }
+
+        .bn632-hover.bn24 {
+            background-image: linear-gradient(to right,
+                    #6253e1,
+                    #852d91,
+                    #a3a1ff,
+                    #f24645);
+            box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+        }
+
+        
     </style>
 </head>
 
 <body>
-    <nav class="navbar bg-black fixed-top rounded-bottom-5 shadow">
+    <nav class="navbar fixed-top shadow">
         <div class="container-fluid">
-            <a class=" btn btn-dark " href="#exitapp">😎 GSA</a>
+            <a class=" btn btn-light rounded-5" href="#exitapp">😎 GSA</a>
             <div class="btn-group">
-                <button type="button" class="btn btn-dark btn-sm  dropdown-toggle" data-bs-toggle="dropdown"
+                <button type="button" class="btn btn-light rounded-5 btn-sm  dropdown-toggle" data-bs-toggle="dropdown"
                     data-bs-display="static" aria-expanded="false">
                     More
                 </button>
-                <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start shadow">
+                <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start rounded-4 shadow">
                     <li><a href="log.html" class="dropdown-item"><i class="bi bi-person-fill-gear"></i> Change Class</a>
                     </li>
                 </ul>
@@ -83,7 +124,7 @@
         </div>
     </nav>
 
-    <nav class="navbar bg-black fixed-bottom shadow-lg rounded-top-5  ">
+    <nav class="navbar fixed-bottom shadow-lg border ">
 
         <div class="container-fluid ">
             <!-- <div class="row w-100">
@@ -96,20 +137,20 @@
             </div> -->
             <ul class="nav nav-pills d-flex justify-content-around w-100">
                 <li class="nav-item ">
-                    <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5  shadow active  text-center"
-                        href="#"><i class="bi bi-house-fill"></i> <br> Home </a>
+                    <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5 active  text-center" href="#"><i
+                            class="bi bi-house-fill"></i> <br> Home </a>
                 </li>
                 <li class="nav-item">
-                    <a id="blog" onclick="togNav('blog')" class="nav-link rounded-5  shadow text-center " href="#"><i
+                    <a id="blog" onclick="togNav('blog')" class="nav-link rounded-5 text-center " href="#"><i
                             class="bi bi-pencil-square"></i> <br> Connect </a>
                 </li>
                 <li class="nav-item">
-                    <a id="note" onclick="togNav('note')" class="nav-link rounded-5 shadow text-center " href="#"><i
+                    <a id="note" onclick="togNav('note')" class="nav-link rounded-5 text-center " href="#"><i
                             class="bi bi-body-text"></i> <br> PDFs</a>
                 </li>
                 <li class="nav-item">
-                    <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-5  shadow text-center " href="#"><i
-                            class="bi bi-journal-bookmark-fill"></i> <br> Books</a>
+                    <a id="ncert" onclick="togNav('ncert')" class="nav-link rounded-5 text-center " href="#"><i
+                            class="bi bi-journal-bookmark-fill"></i> <br> Library</a>
                 </li>
             </ul>
         </div>
@@ -119,8 +160,7 @@
 
     <div class="container" id="show_data" style="margin-top: 100px; margin-bottom: 100px;">
 
-
-        <div class="card my-2 " aria-hidden="true" id="loader">
+        <div class="card my-2 rounded-4" aria-hidden="true" id="loader">
 
             <div class="card-body">
                 <div class="card-img-top"></div>
@@ -198,17 +238,17 @@
         switch (doc.data().type) {
             case "batch":
                 show_data.innerHTML += `
-                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 border-0 shadow animate__animated animate__fadeInUp">
+                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
-                    
+                    <button class="bn632-hover bn24">Go</button>
                     </div>
                 </a>
             `;
                 break;
             case "ncert":
                 show_data.innerHTML += `
-            <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 border-0 shadow animate__animated animate__fadeInUp">
+            <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                     </div>
@@ -217,7 +257,7 @@
                 break;
             case "note":
                 show_data.innerHTML += `
-                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body border-0  shadow click my-2 animate__animated animate__fadeInUp" >
+                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body rounded-4 click my-2 animate__animated animate__fadeInUp" >
         <div class="row">
             <div class="col-9 text-truncate ">
                 ${doc.data().title}
@@ -231,7 +271,7 @@
 
             default:
                 show_data.innerHTML += `
-                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 border-0 shadow animate__animated animate__fadeInUp">
+                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                     </div>

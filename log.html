@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -27,15 +27,9 @@
 
 
         .card {
-            border-radius: 30px;
             font-size: 13px;
-
         }
 
-        .card:hover {
-            background-color: black;
-            border-radius: 40px;
-        }
 
         .alert {
             font-size: 13px;
@@ -52,17 +46,57 @@
         a {
             text-decoration: none;
         }
+        .bn632-hover {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 20px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn632-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn632-hover:focus {
+  outline: none;
+}
+
+.bn632-hover.bn20 {
+  background-image: linear-gradient(
+    to right,
+    #667eea,
+    #764ba2,
+    #6b8dd6,
+    #8e37d7
+  );
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
     </style>
 </head>
 
 <body>
     <div class="container position-absolute top-50 start-50 translate-middle">
-        <div class="card shadow-lg border-0 m-auto" style="width: 80%;">
+        <div class="card rounded-4 border-0 m-auto" style="width: 80%;">
 
-            <div class="card-body animate__animated animate__fadeInDown">
-                <img class="card-img-top rounded-5" src="logo.png">
+            <div class="card-body">
+                <img class="card-img-top rounded-4" src="logo.png">
                 <h4 class="my-3 text-secondary text-center">Select Class</h4>
-                <select class="form-select form-select-lg mb-3 rounded-pill" aria-label="Large select example"
+                <select class="form-select form-select-lg mb-3 rounded-4" aria-label="Large select example"
                     id="class">
                     <option selected dis>Choose</option>
                     <option value="9">9</option>
@@ -75,12 +109,12 @@
 
                 </div>
                 <button id="setbtn" onclick="setClass('setbtn')"
-                    class="btn btn-primary shadow-lg btn-lg w-100 rounded-pill"> Continue <i
+                    class="bn632-hover bn20"> Continue <i
                         class="bi bi-arrow-right"></i></button>
             </div>
         </div>
         <br>
-        <a href="#" class="card card-body text-center text-primary-emphasis shadow-lg border-0 m-auto" style="width: 80%;">
+        <a href="#" class="card card-body rounded-4 border-0 text-center text-primary-emphasis m-auto" style="width: 80%;">
             <span>          <i class="bi bi-shield-check"></i>  Privacy Policy</span>
         </a>
     </div>
@@ -107,13 +141,13 @@
             theAlert.classList.remove("alert-danger");
             theAlert.classList.add("alert-success");
             theAlert.style.display = "block";
-            document.getElementById(loader).innerHTML = `<div class="spinner-grow text-light" role="status">
+            document.getElementById(loader).innerHTML = `<div class="spinner-border text-light" role="status">
                                                                     <span class="visually-hidden">Loading...</span>
                                                             </div>`;
 
             setTimeout(() => {
                 window.location.href = 'index.html';
-            }, 3000);
+            }, 2000);
         }
 
     }
