@@ -35,18 +35,20 @@
 
         .card {
             font-size: 13px;
-            background-color: whitesmoke;
-            border: 1px solid white
         }
 
         .card:hover {
-            background-color: rgb(255, 255, 255);
-            box-shadow: 0 4px 15px 0 rgba(107, 107, 107, 0.75);
+            background-color: whitesmoke;
         }
 
         .nav-link {
             font-size: 10px;
-            background-color: whitesmoke;
+            color:rgb(0, 0, 0);
+        }
+        .nav-link i{
+            padding: 0px 10px;
+            font-size: 15px;
+            border-radius: 20px;
         }
 
         .alert {
@@ -65,56 +67,26 @@
         a {
             text-decoration: none;
         }
-
-        .bn632-hover {
-            width: 100%;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            cursor: pointer;
-            height: 40px;
-            text-align: center;
-            border: none;
-            background-size: 300% 100%;
-            border-radius: 10px;
-            -o-transition: all 0.4s ease-in-out;
-            -webkit-transition: all 0.4s ease-in-out;
-            transition: all 0.4s ease-in-out;
+        .active i {
+            background-color: rgba(0, 102, 255, 0.267);
         }
-
-        .bn632-hover:hover {
-            background-position: 100% 0;
-            moz-transition: all .4s ease-in-out;
-            -o-transition: all .4s ease-in-out;
-            -webkit-transition: all .4s ease-in-out;
-            transition: all .4s ease-in-out;
+        .active{
+            font-weight:bold;
         }
-
-        .bn632-hover:focus {
-            outline: none;
-        }
-
-        .bn632-hover.bn24 {
-            background-image: linear-gradient(to right,
-                    #6253e1,
-                    #852d91,
-                    #a3a1ff,
-                    #f24645);
-            box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
-        }
+        
 
         
     </style>
 </head>
 
 <body>
-    <nav class="navbar fixed-top shadow">
+    <nav class="navbar fixed-top border bg-light">
         <div class="container-fluid">
-            <a class=" btn btn-light rounded-5" href="#exitapp">😎 GSA</a>
+            <a class="fw-bold" id="navtitle">Gajendra Academy</a>
             <div class="btn-group">
-                <button type="button" class="btn btn-light rounded-5 btn-sm  dropdown-toggle" data-bs-toggle="dropdown"
+                <button type="button" class="btn btn-light rounded-5" data-bs-toggle="dropdown"
                     data-bs-display="static" aria-expanded="false">
-                    More
+                    <i class="bi bi-three-dots-vertical"></i>
                 </button>
                 <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start rounded-4 shadow">
                     <li><a href="log.html" class="dropdown-item"><i class="bi bi-person-fill-gear"></i> Change Class</a>
@@ -124,7 +96,7 @@
         </div>
     </nav>
 
-    <nav class="navbar fixed-bottom shadow-lg border ">
+    <nav class="navbar fixed-bottom border bg-light ">
 
         <div class="container-fluid ">
             <!-- <div class="row w-100">
@@ -135,7 +107,7 @@
                     <button onclick="showAllCards()" class="btn btn-dark w-100" id="superbtn">GSA</button>
                 </div>
             </div> -->
-            <ul class="nav nav-pills d-flex justify-content-around w-100">
+            <ul class="nav d-flex justify-content-around w-100">
                 <li class="nav-item ">
                     <a id="batch" onclick="togNav('batch')" class="nav-link rounded-5 active  text-center" href="#"><i
                             class="bi bi-house-fill"></i> <br> Home </a>
@@ -241,7 +213,7 @@
                 <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
-                    <button class="bn632-hover bn24">Go</button>
+                    <button class="btn btn-primary w-100 rounded-4 ">Go</button>
                     </div>
                 </a>
             `;
