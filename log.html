@@ -46,52 +46,13 @@
         a {
             text-decoration: none;
         }
-        .bn632-hover {
-  width: 100%;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-
-  height: 55px;
-  text-align:center;
-  border: none;
-  background-size: 300% 100%;
-  border-radius: 20px;
-  moz-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -webkit-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
-}
-
-.bn632-hover:hover {
-  background-position: 100% 0;
-  moz-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -webkit-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
-}
-
-.bn632-hover:focus {
-  outline: none;
-}
-
-.bn632-hover.bn20 {
-  background-image: linear-gradient(
-    to right,
-    #667eea,
-    #764ba2,
-    #6b8dd6,
-    #8e37d7
-  );
-  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
-}
+        
     </style>
 </head>
 
 <body>
     <div class="container position-absolute top-50 start-50 translate-middle">
-        <div class="card rounded-4 border-0 m-auto" style="width: 80%;">
+        <div class="card rounded-4 border-0 m-auto bg-light shadow-sm" style="width: 80%;">
 
             <div class="card-body">
                 <img class="card-img-top rounded-4" src="logo.png">
@@ -109,7 +70,7 @@
 
                 </div>
                 <button id="setbtn" onclick="setClass('setbtn')"
-                    class="bn632-hover bn20"> Continue <i
+                    class="btn btn-primary btn-lg w-100 rounded-4"> Continue <i
                         class="bi bi-arrow-right"></i></button>
             </div>
         </div>

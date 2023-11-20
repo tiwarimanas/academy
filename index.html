@@ -37,17 +37,14 @@
             font-size: 13px;
         }
 
-        .card:hover {
-            background-color: whitesmoke;
-        }
-
+       
         .nav-link {
             font-size: 10px;
             color:rgb(0, 0, 0);
         }
         .nav-link i{
             padding: 0px 10px;
-            font-size: 15px;
+            font-size: 20px;
             border-radius: 20px;
         }
 
@@ -80,7 +77,7 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top border bg-light">
+    <nav class="navbar fixed-top  bg-light">
         <div class="container-fluid">
             <a class="fw-bold" id="navtitle">Gajendra Academy</a>
             <div class="btn-group">
@@ -88,7 +85,7 @@
                     data-bs-display="static" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>
                 </button>
-                <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start rounded-4 shadow">
+                <ul class="dropdown-menu  dropdown-menu-end bg-light shadow border-0 dropdown-menu-lg-start">
                     <li><a href="log.html" class="dropdown-item"><i class="bi bi-person-fill-gear"></i> Change Class</a>
                     </li>
                 </ul>
@@ -96,9 +93,9 @@
         </div>
     </nav>
 
-    <nav class="navbar fixed-bottom border bg-light ">
+    <nav class="navbar fixed-bottom  bg-light animate__animated animate__fadeInUp">
 
-        <div class="container-fluid ">
+        <div class="container-fluid">
             <!-- <div class="row w-100">
                 <div class="col-3">
                     <button class="btn btn-outline-danger"><i class="bi bi-box-arrow-left"></i></button>
@@ -132,7 +129,7 @@
 
     <div class="container" id="show_data" style="margin-top: 100px; margin-bottom: 100px;">
 
-        <div class="card my-2 rounded-4" aria-hidden="true" id="loader">
+        <div class="card my-2 rounded-4 bg-light shadow-sm border-0 animate__animated animate__fadeInDown" aria-hidden="true" id="loader">
 
             <div class="card-body">
                 <div class="card-img-top"></div>
@@ -210,7 +207,7 @@
         switch (doc.data().type) {
             case "batch":
                 show_data.innerHTML += `
-                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
+                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card bg-light shadow-sm border-0 my-2 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                     <button class="btn btn-primary w-100 rounded-4 ">Go</button>
@@ -220,7 +217,7 @@
                 break;
             case "ncert":
                 show_data.innerHTML += `
-            <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
+            <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 bg-light shadow-sm border-0 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                     </div>
@@ -229,7 +226,7 @@
                 break;
             case "note":
                 show_data.innerHTML += `
-                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card click card-body rounded-4 click my-2 animate__animated animate__fadeInUp" >
+                <a href="${doc.data().href}#outapp" id="${doc.data().type}" class="card bg-light shadow-sm border-0 card-body rounded-4 click my-2 animate__animated animate__fadeInUp" >
         <div class="row">
             <div class="col-9 text-truncate ">
                 ${doc.data().title}
@@ -243,7 +240,7 @@
 
             default:
                 show_data.innerHTML += `
-                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 rounded-4 animate__animated animate__fadeInUp">
+                <a href="page.html?q=${doc.id}" id="${doc.data().type}" class="card my-2 bg-light shadow-sm border-0 rounded-4 animate__animated animate__fadeInUp">
                     <div class="card-body">
                     ${doc.data().title}
                     </div>
