@@ -45,6 +45,19 @@
                         <option value="12">12th</option>
                     </select>
                     <br>
+                    <select name="#" id="sub" class="form-control shadow-sm border-0">
+                        <option disabled selected> Select Subject</option>
+                        <option value="important">Important</option>
+                        <option value="worksheets">Worksheets</option>
+                        <option value="math">Mathematics </option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="biology">Biology </option>
+                        <option value="social-science">Social Science</option>
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                    </select>
+                    <br>
                     <input type="file" name="#" id="file" class="form-control shadow-sm border-0">
                     <br>
                     <div class="alert alert-success shadow rounded-4 animate__animated animate__jackInTheBox" role="alert" id="alert" style="display: none;">
@@ -115,6 +128,7 @@
         thealert(`Fill all the feilds` , `warning`);
         const thetitle = document.getElementById("title").value;
         const theClass = document.getElementById("class").value;
+        const theSub = document.getElementById("sub").value;
         const file = document.getElementById('file').files[0];
         const storageRef = ref(storage, 'notes/' + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -170,6 +184,7 @@
                         const docRef = addDoc(collection(db, "data"), {
                             title: thetitle,
                             class: theClass,
+                            sub: theSub,
                             href: downloadURL,
                             type: "note"
 
