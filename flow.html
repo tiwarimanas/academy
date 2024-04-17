@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <meta name="renderer" content="webkit" />
+
+  <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+  <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+  <!-- Include the icon's CSS file if using the icon attribute -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <title>MEGABITS</title>
+  <style>
+    /* Import Google font - Poppins */
+    @import url("https://fonts.googleapis.com/css2?family=Lexend");
+
+    * {
+      font-family: "Lexend", sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <mdui-top-app-bar style="border-bottom: 1px solid #e0e0e0;">
+    <mdui-button-icon onclick="redirectToPreviousPage()" icon="arrow_back"></mdui-button-icon>
+    <mdui-top-app-bar-title><mdui-circular-progress></mdui-circular-progress></mdui-top-app-bar-title>
+  </mdui-top-app-bar>
+
+
+
+  <mdui-list>
+    <mdui-collapse>
+      <mdui-collapse-item>
+        <mdui-list-item slot="header" end-icon="keyboard_arrow_down" active rounded><mdui-button-icon slot="icon" variant="outlined" icon="push_pin"></mdui-button-icon> <h2>Notice</h2></mdui-list-item>
+        <div style="margin-left: 0rem" id="notice">
+          <mdui-list-item nonclickable> <mdui-circular-progress></mdui-circular-progress> </mdui-list-item>
+          <mdui-divider middle></mdui-divider>
+        </div>
+      </mdui-collapse-item>
+    </mdui-collapse>
+  </mdui-list>
+
+  <main id="subjects">
+    <div style="display:flex;">
+      <mdui-card href="/sub.html?q=math-${code}" style="width: 100%;margin:0.2rem;">
+        <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/ESu2QEXm8_1g3yM9LS2O19jeB94I9KjaI3RMhn4B1qkBTeI-0sEShbYQwAMIbyfZzWJCvOex4UxBWkY73RMPpA15=s124" alt="IMG">
+        <h5 style="margin: 0px;padding: 7px 5px;">Mathematics</h5>
+      </mdui-card>
+      <mdui-card href="/sub.html?q=science-${code}" style="width: 100%;margin:0.2rem;">
+        <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/vqGFFOD0UqyM7ocLlLPLfea_4ijUXjurDNcz29Aex0zOPkjfy97-Bep5Xh7QSLTpJRkrUMfOcCfc95snqOKiecm7OA=s124" alt="IMG">
+        <h5 style="margin: 0px;padding: 7px 5px;">Science</h5>
+      </mdui-card>
+    </div>
+    <div style="display:flex;">
+      <mdui-card href="/sub.html?q=ss-${code}" style="width: 100%;margin:0.2rem;">
+        <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/RC-oav7d7_018ULh-5xutUwBTU186QNr0FAi2jIvdtHdn7GFt4X-VgOU2rVpTR1GqTqnDbT0sxf47eM7d95wMmhz9A=s124" alt="IMG">
+        <h5 style="margin: 0px;padding: 7px 5px;">Social Science</h5>
+      </mdui-card>
+      <mdui-card href="/sub.html?q=english-${code}" style="width: 100%;margin:0.2rem;">
+        <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/EueOIIiiObO2yemhMcU1EBv6kY-IMs9lrWZPHFP3Okh-unQUciANIg6PrQ7f0SKhFhMnLiJ6aEmc3SXcHx5D2jvjQME=s124" alt="IMG">
+        <h5 style="margin: 0px;padding: 7px 5px;">English</h5>
+      </mdui-card>
+    </div>
+    <div style="display:flex;">
+      <mdui-card href="/sub.html?q=it-${code}" style="width: 100%;margin:0.2rem;">
+        <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/Q2X8LHLnDE5Kl4KXulGbsiQIO_SIhMx11-uG8KbEokjhXEpwxsCUODK4De07RIW6_Vio3UlSUfS84bq2C44a0bfl=s124" alt="IMG">
+        <h5 style="margin: 0px;padding: 7px 5px;">Computer</h5>
+      </mdui-card>
+      <mdui-card href="/sub.html?q=hindi-${code}" style="width: 100%;margin:0.2rem;">
+        <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/03seNKL6l2kHiD0CptCl8JaAWkVovyw_t5qSZ1lARCOQdg5s4e9vFyMkXuhutUM-odVlf1U7QZtGYBENvOcrFV9snw=s124" alt="IMG">
+        <h5 style="margin: 0px;padding: 7px 5px;">Hindi</h5>
+      </mdui-card>
+    </div>
+  </main>
+
+  
+  
+
+  <mdui-snackbar>
+  </mdui-snackbar>
+
+
+
+
+</body>
+<script>
+  // Redirect to the previous page
+function redirectToPreviousPage() {
+    window.history.back();
+}
+
+ function Alert(content) {
+    const snackbar = document.querySelector("mdui-snackbar");
+    snackbar.innerHTML = content;
+    snackbar.open = true;
+  }
+
+
+function setInnerHTML(code) {
+    // Get a reference to the div element by its ID
+    var myDiv = document.getElementById('subjects');
+
+    myDiv.innerHTML = `
+    <div style="display:flex;">
+    <mdui-card href="/sub.html?q=math-${code}" style="width: 100%;margin:0.2rem;">
+      <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/ESu2QEXm8_1g3yM9LS2O19jeB94I9KjaI3RMhn4B1qkBTeI-0sEShbYQwAMIbyfZzWJCvOex4UxBWkY73RMPpA15=s124" alt="IMG">
+      <h5 style="margin: 0px;padding: 7px 5px;">Mathematics</h5>
+    </mdui-card>
+    <mdui-card href="/sub.html?q=science-${code}" style="width: 100%;margin:0.2rem;">
+      <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/vqGFFOD0UqyM7ocLlLPLfea_4ijUXjurDNcz29Aex0zOPkjfy97-Bep5Xh7QSLTpJRkrUMfOcCfc95snqOKiecm7OA=s124" alt="IMG">
+      <h5 style="margin: 0px;padding: 7px 5px;">Science</h5>
+    </mdui-card>
+  </div>
+  <div style="display:flex;">
+    <mdui-card href="/sub.html?q=ss-${code}" style="width: 100%;margin:0.2rem;">
+      <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/RC-oav7d7_018ULh-5xutUwBTU186QNr0FAi2jIvdtHdn7GFt4X-VgOU2rVpTR1GqTqnDbT0sxf47eM7d95wMmhz9A=s124" alt="IMG">
+      <h5 style="margin: 0px;padding: 7px 5px;">Social Science</h5>
+    </mdui-card>
+    <mdui-card href="/sub.html?q=english-${code}" style="width: 100%;margin:0.2rem;">
+      <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/EueOIIiiObO2yemhMcU1EBv6kY-IMs9lrWZPHFP3Okh-unQUciANIg6PrQ7f0SKhFhMnLiJ6aEmc3SXcHx5D2jvjQME=s124" alt="IMG">
+      <h5 style="margin: 0px;padding: 7px 5px;">English</h5>
+    </mdui-card>
+  </div>
+  <div style="display:flex;">
+    <mdui-card href="/sub.html?q=it-${code}" style="width: 100%;margin:0.2rem;">
+      <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/Q2X8LHLnDE5Kl4KXulGbsiQIO_SIhMx11-uG8KbEokjhXEpwxsCUODK4De07RIW6_Vio3UlSUfS84bq2C44a0bfl=s124" alt="IMG">
+      <h5 style="margin: 0px;padding: 7px 5px;">Computer</h5>
+    </mdui-card>
+    <mdui-card href="/sub.html?q=hindi-${code}" style="width: 100%;margin:0.2rem;">
+      <img style="width: 100%; height:75px; object-fit:cover; " src="https://lh3.googleusercontent.com/03seNKL6l2kHiD0CptCl8JaAWkVovyw_t5qSZ1lARCOQdg5s4e9vFyMkXuhutUM-odVlf1U7QZtGYBENvOcrFV9snw=s124" alt="IMG">
+      <h5 style="margin: 0px;padding: 7px 5px;">Hindi</h5>
+    </mdui-card>
+  </div>
+    `;
+    
+}
+function setAppBarTitle(newTitle) {
+    // Find the element with the tag "mdui-top-app-bar-title"
+    const appBarTitleElement = document.querySelector('mdui-top-app-bar-title');
+    appBarTitleElement.innerText = newTitle;
+    
+}
+
+
+
+
+  function fetchDataFromSheet(q) {
+    const noticbox = document.getElementById('notice');
+
+    // Construct the URL with the provided 'q' parameter
+    const url = `https://script.google.com/macros/s/AKfycbyPruocq6hzfBduNC8d69K3JMBaksJVPQ6ls6itY1OCpDdR_uZfNVrucQgPULsNX1vwcQ/exec?sheet=notice-${q}`;
+
+    // Fetch data from the specified URL
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data); // Process the JSON data returned from the API
+
+        // Clear the noticbox content before appending new data
+        noticbox.innerHTML = "";
+
+        // Display data in HTML
+        data.forEach(row => {
+          noticbox.innerHTML += `
+          <mdui-list-item nonclickable><mdui-chip slot="icon"> ${row.Serial}</mdui-chip><span style="font-size:11px;">${row.Notice}</span>
+          </mdui-list-item>
+          <mdui-divider middle></mdui-divider>
+          `;
+        });
+
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        Alert(`Error fetching data <hr> This course is currently unavailable.`);
+      });
+  }
+
+  // Function to get URL parameters
+  function getUrlParams() {
+    const params = {};
+    const queryString = window.location.search.substring(1);
+    const urlParams = new URLSearchParams(queryString);
+    for (const [key, value] of urlParams) {
+      params[key] = value;
+    }
+    return params;
+  }
+
+  // Check if the page was accessed via a GET request
+
+  // window.onload = function() {
+  //     const urlParams = getUrlParams();
+  //     if (Object.keys(urlParams).length > 0) {
+  //         // If there are parameters in the URL, it's a GET request
+  //         console.log('GET request detected with parameters:', urlParams);
+  //         // You can perform actions based on the parameters received
+  //         // For example, access specific values like urlParams['paramName']
+  //     } else {
+  //         console.log('No GET request detected.');
+  //     }
+  // };
+
+  window.onload = function () {
+    const urlParams = getUrlParams();
+
+
+    if ('q' && 'n' in urlParams) {
+      // If parameter "q" exists in the URL
+      const qValue = urlParams['q'];
+      const nValue = urlParams['n'];
+      console.log('Parameter "q" & "n" detected with value:', qValue, nValue);
+      setAppBarTitle(nValue);
+      setInnerHTML(qValue);
+      fetchDataFromSheet(qValue);
+      // Now you can use qValue in your logic
+    } else {
+      console.log('Parameter "q" & "n"  not found in the URL.');
+      Alert('Parameter "q" & "n"  not found in the URL.');
+    };
+    
+  };
+
+
+</script>
+
+</html>
