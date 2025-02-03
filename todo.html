@@ -1,372 +1,79 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samay</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>To-Do App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-   @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
-
-/* Apply Lexend as default font */
-body {
-    font-family: 'Lexend', sans-serif;
-}
-
-
-
-        .todo-item {
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-            border: 1px solid #dee2e6;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-        }
-
-  .priority-high {
-    border-left: 6px solid #ff4d4d;  /* Bright Coral Red for High Priority */
-}
-
-.priority-medium {
-    border-left: 6px solid #ffcc66;  /* Soft Amber Yellow for Medium Priority */
-}
-
-.priority-low {
-    border-left: 6px solid #66d9ff;  /* Sky Blue for Low Priority */
-}
-
-
-      
-        .graph-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-
-        .completed-task {
-            opacity: 0.6;
-        }
-
-        .completed-task .task-title {
-            text-decoration: line-through;
-        }
+        body { background-color: #f8f9fa; }
+        .container { max-width: 400px; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <nav class="navbar sticky-top border-bottom text-bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand fw-bold" href="#">Tasks</a>
+    <div class="container">
+        <h2 class="text-center my-3">To-Do List</h2>
+        <div class="input-group mb-3">
+            <input type="text" id="todo-input" class="form-control" placeholder="Add a new task">
+            <button class="btn btn-dark" id="add-todo"><i class="bi bi-plus-circle"></i> Add</button>
         </div>
-      </nav>
+        <ul class="list-group" id="todo-list"></ul>
+    </div>
     <nav class="navbar fixed-bottom bg-body-tertiary border-top">
         <div class="container-fluid">
             <div class="d-flex justify-content-evenly w-100">
-                <a href="index.html" class="btn btn-lg"><i class="bi bi-house"></i></a>
-                <a href="todo.html"  class="btn btn-lg btn-dark"><i class="bi bi-check2-circle"></i></a>
+                <a href="index.html" class="btn btn-lg btn-dark"><i class="bi bi-house"></i></a>
+                <a href="todo.html"  class="btn btn-lg"><i class="bi bi-check2-circle"></i></a>
                 <a href="auth.html"  class="btn btn-lg"><i class="bi bi-person-circle"></i></a>
             </div>
         </div>
       </nav>
-    <div class="container mb-5">
-        <div class="card p-4 border-0">
-            <!-- Header -->
-            <div class="row mb-4">
-                <!-- <div class="col-md-6">
-                    <h1 class="h3 fw-bold text-dark">Samay</h1>
-                    <p class="text-muted">A todo app</p>
-                </div> -->
-                <div class="col-md-6 d-flex justify-content-md-end gap-2 flex-wrap">
-                    <button id="addTaskBtn" class="btn btn-dark rounded-pill">
-                        <i class="fas fa-plus me-2"></i> Add Task
-                    </button>
-                    <a href="#graphSection" id="viewGraphBtn" class="btn bg-primary-subtle rounded-pill">
-                        <i class="fas fa-chart-bar me-2"></i> View Graph
-                    </a>
-                </div>
-            </div>
 
-            <!-- Search -->
-            <div class="mb-4">
-                <input type="text" id="searchInput" class="form-control form-control-lg rounded-4 shadow-sm" placeholder="Search Tasks...">
-            </div>
-
-            <!-- Statistics -->
-            <div class="row mb-4">
-    <div class="col-6 col-md-3 mb-3">
-        <div class="d-flex align-items-center">
-            <h4 class="fw-bold text-primary mb-0 me-2" id="totalTasks">0</h4>
-            <span class="badge bg-primary text-white"><i class="fas fa-tasks me-1"></i>Total Tasks</span>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 mb-3">
-        <div class="d-flex align-items-center">
-            <h4 class="fw-bold text-success mb-0 me-2" id="completedTasks">0</h4>
-            <span class="badge bg-success text-white"><i class="fas fa-check-circle me-1"></i>Completed</span>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 mb-3">
-        <div class="d-flex align-items-center">
-            <h4 class="fw-bold text-warning mb-0 me-2" id="upcomingTasks">0</h4>
-            <span class="badge bg-warning text-dark"><i class="fas fa-clock me-1"></i>Upcoming</span>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 mb-3">
-        <div class="d-flex align-items-center">
-            <h4 class="fw-bold text-danger mb-0 me-2" id="overdueTasks">0</h4>
-            <span class="badge bg-danger text-white"><i class="fas fa-exclamation-circle me-1"></i>Overdue</span>
-        </div>
-    </div>
-</div>
-
-
-            <!-- Task List -->
-            <div id="taskList"></div>
-
-            <!-- Graph Section -->
-            <div id="graphSection" class="d-none mt-4">
-                <div class="graph-container">
-                    <canvas id="taskGraph"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Task Modal -->
-    <div class="modal" id="taskModal" tabindex="-1">
-    <div class="modal-dialog modal-fullscreen-sm-down">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Task</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="taskForm">
-                    <div class="form-floating mb-3">
-                        <input type="text" id="taskTitle" class="form-control rounded-4" placeholder="Task Title" required>
-                        <label for="taskTitle">Title</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="date" id="taskDueDate" class="form-control rounded-4" placeholder="Due Date" required>
-                        <label for="taskDueDate">Due Date</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <select id="taskPriority" class="form-select rounded-4">
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                        <label for="taskPriority">Priority</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <textarea id="taskDescription" class="form-control rounded-4" placeholder="Task Description" style="height: 100px"></textarea>
-                        <label for="taskDescription">Description</label>
-                    </div>
-                    <div class="text-end">
-                        <button type="button" class="btn bg-primary-subtle rounded-pill" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-dark rounded-pill">Add Task</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-  
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-    
     <script>
-        class TaskManager {
-            constructor() {
-                this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-                this.modal = new bootstrap.Modal(document.getElementById('taskModal'));
-                this.initializeApp();
-            }
+        const TODO_STORAGE_KEY = 'todo_app_tasks';
 
-            initializeApp() {
-                this.setupEventListeners();
-                this.updateUI();
-            }
-
-            setupEventListeners() {
-                document.getElementById('addTaskBtn').addEventListener('click', () => {
-                    this.modal.show();
-                });
-
-                document.getElementById('viewGraphBtn').addEventListener('click', () => {
-                    const graphSection = document.getElementById('graphSection');
-                    graphSection.classList.toggle('d-none');
-                    if (!graphSection.classList.contains('d-none')) {
-                        this.updateGraph();
-                    }
-                });
-
-                document.getElementById('taskForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.addTask();
-                });
-
-                document.getElementById('searchInput').addEventListener('input', (e) => {
-                    this.filterTasks(e.target.value);
-                });
-            }
-
-            addTask() {
-                const title = document.getElementById('taskTitle').value;
-                const dueDate = document.getElementById('taskDueDate').value;
-                const priority = document.getElementById('taskPriority').value;
-                const description = document.getElementById('taskDescription').value;
-
-                const task = {
-                    id: Date.now(),
-                    title,
-                    dueDate,
-                    priority,
-                    description,
-                    completed: false,
-                    createdAt: new Date().toISOString()
-                };
-
-                this.tasks.push(task);
-                this.saveTasks();
-                this.updateUI();
-                this.modal.hide();
-                document.getElementById('taskForm').reset();
-            }
-
-            deleteTask(id) {
-                this.tasks = this.tasks.filter(task => task.id !== id);
-                this.saveTasks();
-                this.updateUI();
-            }
-
-            toggleTaskComplete(id) {
-                const task = this.tasks.find(task => task.id === id);
-                if (task) {
-                    task.completed = !task.completed;
-                    this.saveTasks();
-                    this.updateUI();
-                }
-            }
-
-            filterTasks(searchTerm) {
-                const taskList = document.getElementById('taskList');
-                taskList.innerHTML = '';
-                
-                const filteredTasks = this.tasks.filter(task => 
-                    task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    task.description.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-
-                filteredTasks.forEach(task => {
-                    taskList.appendChild(this.createTaskElement(task));
-                });
-            }
-
-            updateUI() {
-                this.updateTaskList();
-                this.updateStats();
-                if (!document.getElementById('graphSection').classList.contains('d-none')) {
-                    this.updateGraph();
-                }
-            }
-
-            updateTaskList() {
-                const taskList = document.getElementById('taskList');
-                taskList.innerHTML = '';
-                this.tasks.forEach(task => {
-                    taskList.appendChild(this.createTaskElement(task));
-                });
-            }
-
-            createTaskElement(task) {
-                const div = document.createElement('div');
-                div.className = `todo-item  priority-${task.priority} ${task.completed ? 'completed-task' : ''}`;
-                div.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="checkbox" class="form-check-input" ${task.completed ? 'checked' : ''} 
-                                onchange="taskManager.toggleTaskComplete(${task.id})">
-                            <div>
-                                <h5 class="mb-1 task-title">${task.title}</h5>
-                                <p class="small text-muted mb-0">Due: ${task.dueDate}</p>
-                            </div>
-                        </div>
-                        <button onclick="taskManager.deleteTask(${task.id})" class="btn btn-link text-danger">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-                return div;
-            }
-
-            updateStats() {
-                const now = new Date();
-                document.getElementById('totalTasks').textContent = this.tasks.length;
-                document.getElementById('completedTasks').textContent = 
-                    this.tasks.filter(task => task.completed).length;
-                document.getElementById('upcomingTasks').textContent = 
-                    this.tasks.filter(task => !task.completed && new Date(task.dueDate) > now).length;
-                document.getElementById('overdueTasks').textContent = 
-                    this.tasks.filter(task => !task.completed && new Date(task.dueDate) < now).length;
-            }
-
-            updateGraph() {
-                const ctx = document.getElementById('taskGraph').getContext('2d');
-                const completedTasks = this.tasks.filter(task => task.completed).length;
-                const pendingTasks = this.tasks.filter(task => !task.completed).length;
-
-                if (this.chart) {
-                    this.chart.destroy();
-                }
-
-                this.chart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Completed', 'Pending'],
-                        datasets: [{
-                            data: [completedTasks, pendingTasks],
-                            backgroundColor: ['#198754', '#dee2e6'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        cutout: '70%',
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20,
-                                    font: {
-                                        size: 14
-                                    }
-                                }
-                            }
-                        },
-                        animation: {
-                            animateScale: true,
-                            animateRotate: true
-                        }
-                    }
-                });
-            }
-
-            saveTasks() {
-                localStorage.setItem('tasks', JSON.stringify(this.tasks));
-            }
+        function loadTodos() {
+            const todos = JSON.parse(localStorage.getItem(TODO_STORAGE_KEY)) || [];
+            $('#todo-list').empty();
+            todos.forEach((todo, index) => {
+                $('#todo-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${todo}
+                    <button class="btn btn-dark btn-sm delete-todo" data-index="${index}"><i class="bi bi-trash"></i></button>
+                </li>`);
+            });
         }
 
-        const taskManager = new TaskManager();
+        function saveTodos(todos) {
+            localStorage.setItem(TODO_STORAGE_KEY, JSON.stringify(todos));
+        }
+
+        $(document).ready(function () {
+            loadTodos();
+
+            $('#add-todo').click(function () {
+                let todoText = $('#todo-input').val().trim();
+                if (todoText) {
+                    let todos = JSON.parse(localStorage.getItem(TODO_STORAGE_KEY)) || [];
+                    todos.push(todoText);
+                    saveTodos(todos);
+                    $('#todo-input').val('');
+                    loadTodos();
+                }
+            });
+
+            $(document).on('click', '.delete-todo', function () {
+                let index = $(this).data('index');
+                let todos = JSON.parse(localStorage.getItem(TODO_STORAGE_KEY)) || [];
+                todos.splice(index, 1);
+                saveTodos(todos);
+                loadTodos();
+            });
+        });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
