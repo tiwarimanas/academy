@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Batches</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Import Lexend from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+/* Apply Lexend as default font */
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar sticky-top border-bottom text-bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="#">Batches</a>
+        </div>
+      </nav>
+    <div class="container ">
+        <a href="add_batch.html" class="btn btn-dark rounded-pill my-3">Add Batch</a>
+        <div id="batchList">
+            <!-- Batches grouped by class will be dynamically added here -->
+        </div>
+
+    </div>
+
+    <script type="module">
+        // Firebase configuration
+        const firebaseConfig = {
+      apiKey: "AIzaSyBtU9x4x2Nqcs1JQG752e9aYxj0sd8qp5Q",
+      authDomain: "mb-gsa.firebaseapp.com",
+      databaseURL: "https://mb-gsa-default-rtdb.firebaseio.com",
+      projectId: "mb-gsa",
+      storageBucket: "mb-gsa.appspot.com",
+      messagingSenderId: "647351231922",
+      appId: "1:647351231922:web:6fcf92feb9675a393bb0ab",
+      measurementId: "G-4XYVTXHCST"
+    };
+
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fetch and group batches by class using jQuery
+        async function fetchBatches() {
+            const batchList = $("#batchList");
+            const querySnapshot = await getDocs(collection(db, "batch"));
+            batchList.html("");
+            
+            const batchGroups = {};
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const batchClass = data.class || "Uncategorized";
+                if (!batchGroups[batchClass]) {
+                    batchGroups[batchClass] = [];
+                }
+                batchGroups[batchClass].push({ id: doc.id, name: data.name });
+            });
+            
+            $.each(batchGroups, (batchClass, batches) => {
+                batchList.append(`<h4>${batchClass}</h4>`);
+                const ul = $("<ul class='list-group mb-3'></ul>");
+                
+                $.each(batches, (index, batch) => {
+                    ul.append(`<a class='list-group-item' href='batch.html?q=${batch.id}'>${batch.name}</a>`);
+                });
+                
+                batchList.append(ul);
+            });
+        }
+
+        fetchBatches();
+    </script>
+</body>
+</html>

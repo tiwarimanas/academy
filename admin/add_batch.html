@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Batch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Import Lexend from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+/* Apply Lexend as default font */
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar sticky-top border-bottom text-bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="#">Add New Batch</a>
+        </div>
+      </nav>
+    <div class="container my-2">
+        <form id="batchForm">
+            <div class="mb-3">
+                <label for="batchName" class="form-label">Batch Name</label>
+                <input type="text" class="form-control shadow-sm" id="batchName" required>
+            </div>
+            <div class="mb-3">
+                <label for="batchClass" class="form-label">Class</label>
+                <select class="form-control shadow-sm" id="batchClass" required>
+                    <option value="">Select Class</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="batchMore" class="form-label">More (Description)</label>
+                <textarea class="form-control shadow-sm" id="batchMore" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark btn-lg w-100 shadow-sm">Add Batch</button>
+        </form>
+    </div>
+
+    <script type="module">
+        // Firebase configuration
+        const firebaseConfig = {
+      apiKey: "AIzaSyBtU9x4x2Nqcs1JQG752e9aYxj0sd8qp5Q",
+      authDomain: "mb-gsa.firebaseapp.com",
+      databaseURL: "https://mb-gsa-default-rtdb.firebaseio.com",
+      projectId: "mb-gsa",
+      storageBucket: "mb-gsa.appspot.com",
+      messagingSenderId: "647351231922",
+      appId: "1:647351231922:web:6fcf92feb9675a393bb0ab",
+      measurementId: "G-4XYVTXHCST"
+    };
+
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        $("#batchForm").on("submit", async function(event) {
+            event.preventDefault();
+            
+            const batchName = $("#batchName").val().trim();
+            const batchClass = $("#batchClass").val();
+            const batchMore = $("#batchMore").val().trim();
+            
+            if (batchName && batchClass) {
+                try {
+                    await addDoc(collection(db, "batch"), {
+                        name: batchName,
+                        class: batchClass,
+                        more: batchMore
+                    });
+                    alert("Batch added successfully!");
+                    window.location.href = "index.html";
+                } catch (error) {
+                    console.error("Error adding batch: ", error);
+                    alert("Failed to add batch. Try again.");
+                }
+            } else {
+                alert("Please fill in all required fields.");
+            }
+        });
+    </script>
+</body>
+</html>

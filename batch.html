@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* Import Lexend from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+        /* Apply Lexend as default font */
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar sticky-top border-bottom text-bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Batch</a>
+        </div>
+    </nav>
+    <div class="container my-3">
+
+        <div class="content">
+
+        </div>
+    </div>
+</body>
+<script type="module">
+    // Import Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBtU9x4x2Nqcs1JQG752e9aYxj0sd8qp5Q",
+        authDomain: "mb-gsa.firebaseapp.com",
+        projectId: "mb-gsa",
+        storageBucket: "mb-gsa.appspot.com",
+        messagingSenderId: "647351231922",
+        appId: "1:647351231922:web:6fcf92feb9675a393bb0ab"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Extract batch ID from URL query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const batchId = urlParams.get("q");
+
+    if (batchId) {
+        const subcollectionRef = collection(db, `batch/${batchId}/msg`);
+        const q = query(subcollectionRef, orderBy("time", "desc"));
+
+        getDocs(q).then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                let data = doc.data();
+                let imgTag = data.img ? `<a href='${data.img}#outapp' ><img src='${data.img}' alt='Image' class='card-img-top rounded'></a>` : "";
+                let linkTag = data.link ? `<a href='${data.link}#outapp' target='_blank' class='btn border mb-1 w-100 rounded'> <i class="bi bi-file-earmark-richtext"></i>  View More</a>` : "";
+
+                $(".content").append(`
+                    <div class='card my-2 shadow-sm'>
+                          ${imgTag}
+                        <div class='card-body'>
+                          
+                            ${linkTag}
+                            <p class='mb-0' style="font-size:13px;">${data.text || "No content available."}</p>
+                        </div>
+                        <div class='card-footer border-0 bg-white d-flex align-items-center' style="font-size:12px;">
+                            <span class='badge border text-black me-2'>${data.tag || "General"}</span>
+                            <span class='text-muted small'>${new Date(data.time.seconds * 1000).toLocaleString()}</span>
+                        </div>
+                    </div>
+                `);
+            });
+        }).catch((error) => {
+            console.error("Error fetching data: ", error);
+        });
+    } else {
+        $(".content").html("<p class='text-danger'>Batch ID not found in URL.</p>");
+    }
+</script>
+
+</html>
